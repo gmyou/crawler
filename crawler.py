@@ -4,13 +4,7 @@ from bs4 import BeautifulSoup
 import sys
 import re
 
-f = open("sample.html")
-
-html = f.read()
-#print(html)
-
-soup = BeautifulSoup(html)
-
+soup = BeautifulSoup(open("sample.html"))
 
 
 #Sheet Subject
