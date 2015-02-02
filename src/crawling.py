@@ -17,7 +17,7 @@ the_page = response.read()
 print the_page
 '''
 
-f = open('./output/kmug_20150131.html')
+f = open('../output/kmug_20150131.html')
 soup = BeautifulSoup(f.read())
 # print soup
 
