@@ -1,0 +1,17 @@
+<form action="./" method="post" onsubmit="return procFilter(this, widget_login)" id="fo_login_widget">
+    <div class="idpw">
+        <img src="/xe/./widgets/login_info/skins/tpholic/images/login_id_bg.gif" alt="아이디">
+        <input name="user_id" type="text" title="user id" class="idpw_input">
+        <img src="/xe/./widgets/login_info/skins/tpholic/images/login_pw_bg.gif" alt="비밀번호">
+        <input name="password" type="password" title="password" class="idpw_input">
+        <span class="save">
+            <input type="checkbox" name="keep_signed" id="keepid" value="Y" onclick="if(this.checked) return confirm(keep_signed_msg);">            
+        </span>
+        <label for="keepid">로그인유지</label>
+        <input type="image" src="/xe/./widgets/login_info/skins/tpholic/images/login_btn.gif" alt="login" class="login">
+    </div>
+    <ul class="help">
+        <li class="first-child"><a href="/xe/?mid=ibmsellbuy2&amp;category=1521642&amp;act=dispMemberSignUpForm"><img src="/xe/./widgets/login_info/skins/tpholic/images/join_btn.gif" alt="회원 가입"></a></li>
+        <li><a href="/xe/?mid=ibmsellbuy2&amp;category=1521642&amp;act=dispMemberFindAccount"><img src="/xe/./widgets/login_info/skins/tpholic/images/find_idpw_btn.gif" alt="아이디/비밀번호 찾기"></a></li>
+    </ul>
+</form>
