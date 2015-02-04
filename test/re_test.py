@@ -1,9 +1,12 @@
 # -*- coding:utf-8 -*-
 import re
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
-td = '">무선 키보드 (애플 정품, 새것)</a>'
+f = open('../resource/KMug.html')
+td  = f.read()
 
-m = re.compile(ur"\p{Hangul}")
+m = re.compile("<a[^>]*>([^<]+)</a>")
 sbj = m.findall(str(td))
-
-print sbj
+print str(unicode(sbj))
