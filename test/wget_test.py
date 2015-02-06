@@ -11,6 +11,6 @@ req = urllib2.Request(url, data)
 response = urllib2.urlopen(req) 
 the_page = response.read()
 
-f = open('../resource/KMug.html', 'r')
+f = open('../resource/KMug.html', w)
 
 f.write(the_page)
