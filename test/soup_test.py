@@ -35,12 +35,12 @@ for link in soup.find_all('tr', attrs={"class": re.compile("^ctl_list")}):
         
     #hit
     try:
-        print link.find_all('td', attrs={"class":"ctl_hit"})[0].a.get_text()
+        print link.find_all('td', attrs={"class":"ctl_hit"})[0].get_text()
     except:
         print 'N/A'
          
     #date
     try:
-        print link.find_all('td', attrs={"class":"ctl_date"})[0].a.get_text()
+        print link.find_all('td', attrs={"class":"ctl_date"})[0].get_text()
     except:
         print 'N/A'
