@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 import re
 from bs4 import BeautifulSoup
+import mysql.connector
+
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -44,30 +46,23 @@ for link in soup.find_all('tr', attrs={"class": re.compile("^ctl_list")}):
     print
     
     lists.append(dict(dic))
-    
+
+
+cnx = mysql.connector.connect(user='scott', database='employees')
+cursor = cnx.cursor()
+
 for l in list(enumerate(lists)):
     print l
-    sql = """INSERT INTO `openchannel`.`data`
-    (`data_id`,
-    `config_id`,
-    `channel_id`,
-    `no`,
-    `subject`,
-    `url`,
-    `content`,
-    `name`,
-    `hit`,
-    `date`)
-    VALUES
-    (<{data_id: }>,
-    <{config_id: }>,
-    <{channel_id: }>,
-    <{no: }>,
-    <{subject: }>,
-    <{url: }>,
-    <{content: }>,
-    <{name: }>,
-    <{hit: }>,
-    <{date: }>);
-    """
-    print sql
+    sql = ("INSERT INTO `openchannel`.`data`"
+    "(`data_id`,`config_id`,`channel_id`,`no`,`subject`,`url`,`content`,`name`,`hit`,`date`)"
+    "VALUES    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,")
+    cursor.execute(sql, l)
+    no = cursor.lastrowid
+    print no
+    print
+    
+    cnx.commit()
+    
+
+cursor.close()
+cnx.close()
