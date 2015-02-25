@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import re
 from bs4 import BeautifulSoup
-import mysql.connector
+import MySQLdb
 
 import sys
 reload(sys)
@@ -48,7 +48,7 @@ for link in soup.find_all('tr', attrs={"class": re.compile("^ctl_list")}):
     lists.append(dict(dic))
 
 
-cnx = mysql.connector.connect(user='scott', database='employees')
+cnx = MySQLdb.connect(user='scott', database='employees')
 cursor = cnx.cursor()
 
 for l in list(enumerate(lists)):
