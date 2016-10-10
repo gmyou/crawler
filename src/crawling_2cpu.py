@@ -3,29 +3,23 @@ import urllib
 import urllib2
 from bs4 import BeautifulSoup
 import re
+import sys
 
-url = 'http://www.2cpu.co.kr/bbs/board.php'
+url = 'http://www.2cpu.co.kr/sell'
 
 values = {'bo_table' : 'sell' }
 
 data = urllib.urlencode(values)
 req = urllib2.Request(url, data)
-f = urllib2.urlopen(req) 
+f = urllib2.urlopen(req)
 
 soup = BeautifulSoup(f.read())
+data = soup.find('table', attrs={'class': 'table table-condensed table-hover'}).findAll('tr', attrs={'class':'visible-xs'})
 
-for link in soup.find_all('tr', attrs={"class": re.compile("^bg")}):
-    no = link.select('td.num')
-    print no[0].get_text()
-    sbj = link.select('td.subject')
-    if (sbj):
-        print sbj[0].select('a')[0].get_text()
-        print sbj[0].select('a')[0]['href']
-        #print sbj[0].select('a')[0]['title']
-    name = link.select('td.name')
-    print name[0].get_text()
-    hit = link.select('td.hit')
-    print hit[0].get_text()
-    date = link.select('td.datetime')
-    print date[0].get_text()
-    print
+for element in data[2:]:
+    for td in element.select('td'):
+        for child in td.findChildren():
+            for a in child.select('a'):
+                for span in a.select('span'):
+                    print span
+        print '------------------------------------------------------'
