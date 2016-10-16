@@ -14,12 +14,21 @@ req = urllib2.Request(url, data)
 f = urllib2.urlopen(req)
 
 soup = BeautifulSoup(f.read())
-data = soup.find('table', attrs={'class': 'table table-condensed table-hover'}).findAll('tr', attrs={'class':'visible-xs'})
+trs = soup.find('table', attrs={'class': 'table table-condensed table-hover'}).find_all('tr', attrs={'class': ''})
 
-for element in data[2:]:
-    for td in element.select('td'):
-        for child in td.findChildren():
-            for a in child.select('a'):
-                for span in a.select('span'):
-                    print span
-        print '------------------------------------------------------'
+data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
+
+for tr in trs[5:]:
+    values = tr.get_text().split('\n')
+    i = 0
+    for value in values:
+        if (value!=''):
+            if (i==0): data['number'] = value
+            if (i==1): data['subject'] = value.encode('utf-8').strip()
+            if (i==2): data['writer'] = value
+            if (i==3): data['write_date'] = value
+            if (i==4): data['hits'] = value
+            if (i>4): pass
+            i += 1
+    data['link'] = tr.a['href'].replace('../sell', url)
+    print data
