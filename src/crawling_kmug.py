@@ -18,8 +18,6 @@ datas = []
 data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
 
 for tr in soup.find_all('tr', attrs={"class": re.compile("^ctl_list[0-9]")}):
-    print tr
-    print '-------------------------------------------------------------------'
     data['number'] = tr.td.get_text().encode('utf-8').strip()
     data['subject'] = tr.a.get_text().encode('utf-8').strip()
     data['link'] = tr.a['href'].replace('zboard.php', url)
