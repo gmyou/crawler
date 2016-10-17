@@ -16,6 +16,7 @@ f = urllib2.urlopen(req)
 soup = BeautifulSoup(f.read())
 trs = soup.find('table', attrs={'class': 'table table-condensed table-hover'}).find_all('tr', attrs={'class': ''})
 
+datas = []
 data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
 
 for tr in trs[5:]:
@@ -31,4 +32,7 @@ for tr in trs[5:]:
             if (i>4): pass
             i += 1
     data['link'] = tr.a['href'].replace('../sell', url)
-    print data
+    datas.append(dict(data))
+
+for data in datas:
+    print data['link'], data['subject']
