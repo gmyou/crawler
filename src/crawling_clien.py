@@ -17,11 +17,18 @@ soup = BeautifulSoup(f.read(), from_encoding="utf-8")
 datas = []
 data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
 
-for tr in soup.find_all('tr', attrs={"class": "mytr"}):
-    data['number'] = tr.td.get_text()
-    data['link'] = tr.find('td', {'class':'post_subject'}).a['href'].replace('../bbs/board.php', url)
-    data['subject'] = tr.find('td', {'class':'post_subject'}).a.get_text().encode('utf-8').strip()
-    datas.append(dict(data))
 
-for data in datas:
-    print data['link'], data['subject']
+def get_data():
+    global datas, data
+
+    for tr in soup.find_all('tr', attrs={"class": "mytr"}):
+        data['number'] = tr.td.get_text()
+        data['link'] = tr.find('td', {'class':'post_subject'}).a['href'].replace('../bbs/board.php', url)
+        data['subject'] = tr.find('td', {'class':'post_subject'}).a.get_text().encode('utf-8').strip()
+        datas.append(dict(data))
+
+    # for data in datas:
+    #     print data['link'], data['subject']
+    return datas
+
+# print get_data()

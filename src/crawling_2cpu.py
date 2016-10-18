@@ -20,6 +20,8 @@ datas = []
 data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
 
 def get_data():
+    global datas, data
+
     for tr in trs[5:]:
         values = tr.get_text().split('\n')
         i = 0
@@ -40,4 +42,4 @@ def get_data():
 
     return datas
 
-print get_data()
+# print get_data()
