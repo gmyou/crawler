@@ -28,6 +28,7 @@ def get_data():
 
     # for data in datas:
     #     print data['link'], data['subject']
+
     return datas
 
 # print get_data()
