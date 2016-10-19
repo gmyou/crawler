@@ -9,14 +9,17 @@ connection = pymongo.MongoClient("mongodb_server", 27017)
 db = connection.crawler
 collection  = db.site_article
 
+def insert(data):
+      # insert data when it is not exist
+    if ( collection.find({'link':data['link']}).count() == 0 ):
+        print data
+        collection.insert(data)
+
 for data in cpu():
-    print data
-    collection.insert(data)
+    insert(data)
 
 for data in clien():
-    print data
-    collection.insert(data)
+    insert(data)
 
 for data in kmug():
-    print data
-    collection.insert(data)
+    insert(data)
