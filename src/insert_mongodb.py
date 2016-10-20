@@ -12,8 +12,9 @@ collection  = db.site_article
 def insert(data):
       # insert data when it is not exist
     if ( collection.find({'link':data['link']}).count() == 0 ):
-        print data
+        print data.encode('utf-8').strip()
         collection.insert(data)
+#           notification
 
 for data in cpu():
     insert(data)
