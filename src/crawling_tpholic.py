@@ -7,7 +7,7 @@ import sys
 from config import get_account
 
 login_url = 'http://tpholic.com/xe/?act=procMemberLogin'
-this_url = 'http://tpholic.com/xe/?mid=ibmsellbuy2&category=1521642'
+url = 'http://tpholic.com/xe/?mid=ibmsellbuy2&category=1521642'
 
 user_id, user_pw = get_account()
 
@@ -17,7 +17,7 @@ opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 login_data = urllib.urlencode({'user_id' : user_id, 'password' : user_pw})
 opener.open(login_url, login_data)
 
-f = opener.open(this_url)
+f = opener.open(url)
 
 soup = BeautifulSoup(f.read())
 
@@ -32,6 +32,8 @@ def get_data():
         data['subject'] = tr.find('td', {'class':'title'}).a.get_text().encode('utf-8').strip()
         data['write_date'] = tr.find('td', {'class':'date'}).get_text()
         data['hits'] = tr.find('td', {'class':'reading'}).get_text()
+        data['link'] = url+tr.find('td', {'class':'title'}).a['href'];
+        # print data['link']
         datas.append(dict(data))
 
     return datas
