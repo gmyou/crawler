@@ -28,12 +28,12 @@ def get_data():
     global datas, data
 
     for tr in soup.find('table', attrs={'class': 'boardList'}).find_all('tr', attrs={'class': 'article'}):
+        data['number'] = tr.find('td', {'class':'num'}).get_text()
         data['writer'] = tr.find('td', {'class':'author'}).div.get_text().encode('utf-8').strip()
         data['subject'] = tr.find('td', {'class':'title'}).a.get_text().encode('utf-8').strip()
         data['write_date'] = tr.find('td', {'class':'date'}).get_text()
         data['hits'] = tr.find('td', {'class':'reading'}).get_text()
         data['link'] = url+tr.find('td', {'class':'title'}).a['href'];
-        # print data['link']
         datas.append(dict(data))
 
     return datas

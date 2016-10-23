@@ -15,13 +15,12 @@ collecionArticle  = db.site_article
 
 def insert(domain, data):
       # insert data when it is not exist
-    if ( collectionSite.find({'link':data['link']}).count() == 0 ):
+    if ( collecionArticle.find({'link':data['link']}).count() == 0 ):
         # TODO {'domain':'', 'count':0, 'update_date':datetime.now()}
         # # data['domain']  = domain
         # # collectionSite.insert()
         collecionArticle.insert(data)
         print domain, data['link'], data['subject']
-#           notification
 
 for data in cpu(), clien(), kmug(), tpholic():
     for d in data:
