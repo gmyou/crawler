@@ -21,15 +21,17 @@ def get_data():
     global datas, data
 
     for tr in soup.find_all('tr', attrs={"class": re.compile("^ctl_list[0-9]")}):
-        data['number'] = tr.td.get_text().encode('utf-8').strip()
-        if ( tr.a.get_text() ):
+        if tr.a is None:
+            pass
+        else:
+            data['number'] = tr.td.get_text().encode('utf-8').strip()
             data['subject'] = tr.a.get_text().encode('utf-8').strip()
-        data['link'] = tr.a['href'].replace('zboard.php', url)
-        datas.append(dict(data))
+            data['link'] = tr.a['href'].replace('zboard.php', url)
+            datas.append(dict(data))
 
     # for data in datas:
     #     print data['link'], data['subject']
 
     return datas
 
-# print get_data()
+print get_data()
