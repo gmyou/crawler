@@ -34,4 +34,4 @@ def get_data():
 
     return datas
 
-print get_data()
+# print get_data()
