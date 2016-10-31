@@ -24,14 +24,14 @@ def get_data():
         if tr.a is None:
             pass
         else:
-            data['number'] = tr.td.get_text().encode('utf-8').strip()
+            data['number'] = tr.td.get_text()
             data['subject'] = tr.a.get_text().encode('utf-8').strip()
             data['link'] = tr.a['href'].replace('zboard.php', url)
             datas.append(dict(data))
 
-    # for data in datas:
-    #     print data['link'], data['subject']
+    for data in datas:
+        print data['link'], data['subject']
 
     return datas
 
-# print get_data()
+get_data()
