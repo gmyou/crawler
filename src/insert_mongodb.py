@@ -15,18 +15,6 @@ collectionSite  = db.site
 collecionArticle  = db.site_article
 
 def insert(domain, data):
-    # upsert siteData when it is not exist
-    domainCount = collectionSite.find({'domain': domain}).count()
-    articleCount = collecionArticle.find({'link': {'$regex': domain}}).count()
-    domainData = {'domain': domain, 'count': articleCount, 'update_date': strftime("%Y-%m-%d %H:%M:%S", localtime())}
-    print domainCount, domainData
-    if (domainCount == 0):
-        collectionSite.insert(domainData)
-    else:
-        domainData['count'] += 1
-        mongoId = collectionSite.find({'domain': domain})
-        collectionSite.update({'_id': mongoId[0].get('_id')}, {"$set": domainData}, upsert=False)
-
     # insert articledData when it is not exist
     if ( collecionArticle.find({'link':data['link']}).count() == 0 ):
         collecionArticle.insert(data)
@@ -39,3 +27,15 @@ for data in cpu(), clien(), kmug(), tpholic():
         domain = '{uri.netloc}'.format(uri=parsed_uri)
         # print domain
         insert(domain, d)
+
+    # upsert siteData when it is not exist
+    domainCount = collectionSite.find({'domain': domain}).count()
+    articleCount = collecionArticle.find({'link': {'$regex': domain}}).count()
+    domainData = {'domain': domain, 'count': articleCount, 'update_date': strftime("%Y-%m-%d %H:%M:%S", localtime())}
+    print domainCount, domainData
+    if (domainCount == 0):
+        collectionSite.insert(domainData)
+    else:
+        domainData['count'] += 1
+        mongoId = collectionSite.find({'domain': domain})
+        collectionSite.update({'_id': mongoId[0].get('_id')}, {"$set": domainData}, upsert=False)
