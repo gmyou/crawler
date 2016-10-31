@@ -32,7 +32,7 @@ for data in cpu(), clien(), kmug(), tpholic():
     domainCount = collectionSite.find({'domain': domain}).count()
     articleCount = collecionArticle.find({'link': {'$regex': domain}}).count()
     domainData = {'domain': domain, 'count': articleCount, 'update_date': strftime("%Y-%m-%d %H:%M:%S", localtime())}
-    print domainCount, domainData
+    # print domainCount, domainData
     if (domainCount == 0):
         collectionSite.insert(domainData)
     else:
