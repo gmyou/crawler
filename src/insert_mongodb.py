@@ -4,7 +4,7 @@ from time import localtime, strftime
 
 from crawling_2cpu import get_data as cpu
 from crawling_clien import get_data as clien
-# from crawling_kmug import get_data as kmug
+from crawling_kmug import get_data as kmug
 from crawling_tpholic import get_data as tpholic
 
 
