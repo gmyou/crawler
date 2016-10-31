@@ -29,9 +29,9 @@ def get_data():
             data['link'] = tr.a['href'].replace('zboard.php', url)
             datas.append(dict(data))
 
-    for data in datas:
-        print data['link'], data['subject']
+    # for data in datas:
+    #     print data['link'], data['subject']
 
     return datas
 
-get_data()
+# get_data()
