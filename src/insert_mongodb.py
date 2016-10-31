@@ -32,8 +32,8 @@ def insert(domain, data):
         collecionArticle.insert(data)
         print domain, data['link'], data['subject']
 
-# for data in cpu(), clien(), kmug(), tpholic():
-for data in cpu(), clien(), tpholic():
+for data in cpu(), clien(), kmug(), tpholic():
+# for data in cpu(), clien(), tpholic():
     for d in data:
         parsed_uri = urlparse( d['link'] )
         domain = '{uri.netloc}'.format(uri=parsed_uri)
