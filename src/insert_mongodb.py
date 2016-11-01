@@ -7,6 +7,7 @@ from crawling_clien import get_data as clien
 from crawling_kmug import get_data as kmug
 from crawling_tpholic import get_data as tpholic
 from crawling_kbdmania import get_data as kbdmania
+from crawling_slrclub import get_data as slrclub
 
 
 connection = pymongo.MongoClient("mongodb_server", 27017)
@@ -21,7 +22,7 @@ def insert(domain, data):
         collecionArticle.insert(data)
         print domain, data['link'], data['subject']
 
-for data in cpu(), clien(), kmug(), tpholic(), kbdmania():
+for data in cpu(), clien(), kmug(), tpholic(), kbdmania(), slrclub():
 # for data in cpu(), clien(), tpholic():
     for d in data:
         parsed_uri = urlparse( d['link'] )
