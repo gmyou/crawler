@@ -27,8 +27,8 @@ def get_data():
         data['subject'] = tr.find('td', {'class':'post_subject'}).a.get_text().encode('utf-8').strip()
         datas.append(dict(data))
 
-    # for data in datas:
-    #     print data['link'], data['subject']
+    for data in datas:
+        print data['link'], data['subject']
     return datas
 
-# print get_data()
+print get_data()
