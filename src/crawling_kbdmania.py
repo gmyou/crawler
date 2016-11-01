@@ -23,7 +23,7 @@ soup = BeautifulSoup(f.read())
 
 
 datas = []
-data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
+data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': '', 'price': ''}
 
 def get_data():
     global datas, data
@@ -35,10 +35,11 @@ def get_data():
         data['write_date'] = tr.find('td', {'class':'date'}).get_text()
         data['hits'] = tr.find('td', {'class':'reading'}).get_text()
         data['link'] = url+tr.find('td', {'class':'title'}).a['href'];
+        data['price'] = tr.find('td', {'class':''}).get_text().encode('utf-8').strip()
         datas.append(dict(data))
 
     # for data in datas:
-    #     print data['link'], data['subject']
+        # print data['link'], data['price'], data['subject']
 
     return datas
 
