@@ -6,6 +6,7 @@ import cookielib, requests
 import sys
 from config import get_account
 
+
 login_url = 'https://www.ppomppu.co.kr/zboard/login_check.php'
 url = 'http://www.ppomppu.co.kr/zboard/zboard.php?id=market&category=3'
 
@@ -17,7 +18,14 @@ opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 login_data = urllib.urlencode({'user_id' : user_id, 'password' : user_pw})
 opener.open(login_url, login_data)
 
-f = opener.open(url)
+request=urllib2.Request(url, None, headers)
+print request.getcode()
+sys.exit()
+request.add_header('Referer', referer)
+
+f = urllib2.urlopen(request)
+print f
+sys.exit()
 
 soup = BeautifulSoup(f.read(), from_encoding="euc-kr")
 print soup
