@@ -30,8 +30,8 @@ def get_data():
     global datas, data
 
     for tr in soup.find('div', attrs={'class': 'tbl_head01'}).find('table').find('tbody').find_all('tr'):
-        subject = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
-        subjects = subject.split('                    ')
+        # subject = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
+        # subjects = subject.split('                    ')
         comment = tr.find('td', {'class':'td_subject'}).find('a', attrs={'class':'win_comment'}).get_text()
         p = re.compile('[0-9]')
         m = p.match(comment)
@@ -39,7 +39,7 @@ def get_data():
             pass
         else:
             data['comments'] = m.group()
-        data['subject'] = subjects[1]
+        data['subject'] = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
         data['link'] = tr.find('td', {'class':'td_subject'}).a['href']
         data['price'] = tr.find('td', {'class':'td_won'}).get_text()
         if tr.find('td', {'class':'td_name'}).find('span', attrs={'class':'sv_wrap'}) is None:
