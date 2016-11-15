@@ -40,8 +40,8 @@ def get_data():
         else:
             data['comments'] = m.group()
         # data['subject'] = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
-        data['subject'] = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
-        data['link'] = subjects[1]
+        data['subject'] = subjects[1]
+        data['link'] = tr.find('td', {'class':'td_subject'}).a['href']
         data['price'] = tr.find('td', {'class':'td_won'}).get_text()
         if tr.find('td', {'class':'td_name'}).find('span', attrs={'class':'sv_wrap'}) is None:
             pass
