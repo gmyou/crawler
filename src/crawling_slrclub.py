@@ -7,7 +7,7 @@ import sys
 from config import get_account
 
 login_url = 'https://www.slrclub.com/login/process.php'
-url = 'http://www.slrclub.com/bbs/zboard.php?id=safe_market&category=1'
+url = 'http://www.slrclub.com/bbs/zboard.php?id=used_market&category=1'
 
 user_id, user_pw = get_account()
 
@@ -29,6 +29,8 @@ def get_data():
     global datas, data
 
     for tr in soup.find('table', attrs={'id': 'bbs_list'}).find('tbody').find_all('tr'):
+        if tr.find('td', {'class':'list_num no_att'}) is None: continue
+
         data['number'] = tr.find('td', {'class':'list_num no_att'}).get_text()
         data['link'] = url+tr.find('td', {'class':'sbj'}).a['href'];
         data['subject'] = tr.find('td', {'class':'sbj'}).a.get_text().encode('utf-8').strip()
@@ -39,7 +41,7 @@ def get_data():
         datas.append(dict(data))
 
     # for data in datas:
-    #     print data['link'], data['subject']
+        # print data['link'], data['subject']
 
     return datas
 
