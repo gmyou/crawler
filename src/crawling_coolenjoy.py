@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+'''
+왜 버전관리가 안되고 있지?
+'''
+
 
 import urllib
 import urllib2
