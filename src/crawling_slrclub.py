@@ -32,7 +32,7 @@ def get_data():
         if tr.find('td', {'class':'list_num no_att'}) is None: continue
 
         data['number'] = tr.find('td', {'class':'list_num no_att'}).get_text()
-        data['link'] = url+tr.find('td', {'class':'sbj'}).a['href'];
+        data['link'] = 'http://www.slrclub.com'+tr.find('td', {'class':'sbj'}).a['href'];
         data['subject'] = tr.find('td', {'class':'sbj'}).a.get_text().encode('utf-8').strip()
         data['writer'] = tr.find('td', {'class':'list_name'}).span.get_text().encode('utf-8').strip()
         data['write_date'] = tr.find('td', {'class':'list_date'}).get_text()
