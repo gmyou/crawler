@@ -34,6 +34,10 @@ def get_data():
     global datas, data
 
     for tr in soup.find('div', attrs={'class': 'tbl_head01'}).find('table').find('tbody').find_all('tr'):
+        sbjs = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
+        sbj = sbjs.split('                    ')
+        if sbj[1] is None:
+            continue
         subject = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
         subjects = subject.split('                    ')
         comment = tr.find('td', {'class':'td_subject'}).find('a', attrs={'class':'win_comment'}).get_text()
@@ -43,8 +47,8 @@ def get_data():
             pass
         else:
             data['comments'] = m.group()
-        data['subject'] = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
-        # data['subject'] = subjects[1]
+        # data['subject'] = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
+        data['subject'] = sbj[1]
         data['link'] = tr.find('td', {'class':'td_subject'}).a['href']
         data['price'] = tr.find('td', {'class':'td_won'}).get_text()
         if tr.find('td', {'class':'td_name'}).find('span', attrs={'class':'sv_wrap'}) is None:
@@ -55,9 +59,9 @@ def get_data():
         data['hits'] = tr.find('td', {'class':'td_hit'}).get_text()
         datas.append(dict(data))
 
-    # for data in datas:
-    #     print data['link'], data['subject']
+    for data in datas:
+        print data['link'], data['subject']
 
     return datas
 
-# get_data()
+get_data()
