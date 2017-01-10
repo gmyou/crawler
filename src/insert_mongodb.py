@@ -1,4 +1,4 @@
-import pymongo
+import pymongo, sys, urllib
 from urlparse import urlparse
 from time import localtime, strftime
 
@@ -11,7 +11,8 @@ from crawling_slrclub import get_data as slrclub
 from crawling_coolenjoy import get_data as coolenjoy
 from crawling_dossa import get_data as dossa
 
-connection = pymongo.MongoClient("mongodb_server", 27017)
+password = urllib.quote_plus(pwd)
+connection = pymongo.MongoClient("mongodb://crwaler_root:"+password+"@mongodb_server/crawler?authMechanism=MONGODB-CR")
 
 db = connection.crawler
 collectionSite  = db.site
