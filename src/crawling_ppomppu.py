@@ -16,12 +16,13 @@ def get_data():
     global datas, data
 
     for li in soup.find('div', attrs={'class':'ppom_new'}).find_all('li', attrs={'class':''}):
-        data['link'] = 'http://www.ppomppu.co.kr/' + li.a['href']
         _subject = li.a.get_text().encode('utf-8').strip().split('\n')
-        if ( len(_subject)!=2 ):
+        if ( len(_subject)==2 ):
+            data['link'] = 'http://www.ppomppu.co.kr/' + li.a['href']
+            data['subject'] = _subject[0]
+            data['comments'] = _subject[1]
+        else:
             pass
-        data['subject'] = _subject[0]
-        data['comments'] = _subject[1]
         datas.append(dict(data))
 
     # for data in datas:
