@@ -1,6 +1,6 @@
 import pymongo, sys, urllib
-# from urlparse import urlparse
-from urllib.parse import urljoin
+from urlparse import urlparse
+# from urllib.parse import urljoin
 from time import localtime, strftime
 
 from crawling_2cpu import get_data as cpu
