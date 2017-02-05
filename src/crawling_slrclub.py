@@ -2,7 +2,7 @@
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-import cookielib, requests
+import cookielib
 import sys
 from config import get_account
 
@@ -40,9 +40,9 @@ def get_data():
         data['hits'] = tr.find('td', {'class':'list_click'}).get_text()
         datas.append(dict(data))
 
-    # for data in datas:
-        # print data['link'], data['subject']
+    for data in datas:
+        print data['link'], data['subject']
 
     return datas
 
-# get_data()
+get_data()

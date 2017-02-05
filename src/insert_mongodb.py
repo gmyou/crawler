@@ -3,6 +3,8 @@ from urlparse import urlparse
 # from urllib.parse import urljoin
 from time import localtime, strftime
 
+from config import get_passwd
+
 from crawling_2cpu import get_data as cpu
 from crawling_clien import get_data as clien
 from crawling_kmug import get_data as kmug
@@ -13,6 +15,7 @@ from crawling_coolenjoy import get_data as coolenjoy
 from crawling_dossa import get_data as dossa
 from crawling_ppomppu import get_data as ppomppu
 
+pwd = get_passwd()
 password = urllib.quote_plus(pwd)
 connection = pymongo.MongoClient("mongodb://crwaler_root:"+password+"@182.162.141.141/crawler?authMechanism=MONGODB-CR")
 
