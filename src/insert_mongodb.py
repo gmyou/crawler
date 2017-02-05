@@ -1,5 +1,6 @@
 import pymongo, sys, urllib
-from urlparse import urlparse
+# from urlparse import urlparse
+from urllib.parse import urljoin
 from time import localtime, strftime
 
 from crawling_2cpu import get_data as cpu
@@ -10,9 +11,10 @@ from crawling_kbdmania import get_data as kbdmania
 from crawling_slrclub import get_data as slrclub
 from crawling_coolenjoy import get_data as coolenjoy
 from crawling_dossa import get_data as dossa
+from crawling_ppomppu import get_data as ppomppu
 
 password = urllib.quote_plus(pwd)
-connection = pymongo.MongoClient("mongodb://crwaler_root:"+password+"@mongodb_server/crawler?authMechanism=MONGODB-CR")
+connection = pymongo.MongoClient("mongodb://crwaler_root:"+password+"@182.162.141.141/crawler?authMechanism=MONGODB-CR")
 
 db = connection.crawler
 collectionSite  = db.site
@@ -22,9 +24,9 @@ def insert(domain, data):
     # insert articledData when it is not exist
     if ( collecionArticle.find({'link':data['link']}).count() == 0 ):
         collecionArticle.insert(data)
-        print domain, data['link'], data['subject']
+        print (domain, data['link'], data['subject'])
 
-for data in cpu(), clien(), kmug(), tpholic(), kbdmania(), slrclub(), coolenjoy(), dossa():
+for data in cpu(), clien(), kmug(), tpholic(), kbdmania(), slrclub(), coolenjoy(), dossa(), ppomppu():
     for d in data:
         parsed_uri = urlparse( d['link'] )
         domain = '{uri.netloc}'.format(uri=parsed_uri)
