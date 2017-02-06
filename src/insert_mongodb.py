@@ -17,7 +17,7 @@ from crawling_ppomppu import get_data as ppomppu
 
 pwd = get_passwd()
 password = urllib.quote_plus(pwd)
-connection = pymongo.MongoClient("mongodb://crwaler_root:"+password+"@182.162.141.141/crawler?authMechanism=MONGODB-CR")
+connection = pymongo.MongoClient("mongodb://crawler_root:"+password+"@182.162.141.141/crawler?authMechanism=MONGODB-CR")
 
 db = connection.crawler
 collectionSite  = db.site
