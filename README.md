@@ -1,5 +1,16 @@
 *Developing* [http://dev.mongodb.wedding-n.com/front]
 
+# Env
+
+## Gathering
+* Python2.7 & Crontab
+
+## WAS
+* PHP 5.x Codeigniter 3.x 
+
+## DBMS
+* MongoDB 2.7.x
+
 ### AS-IS
 
 * 2CPU
