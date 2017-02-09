@@ -2,7 +2,7 @@
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-import cookielib, requests
+import cookielib
 import sys
 from config import get_account
 

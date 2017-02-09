@@ -7,7 +7,7 @@
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-import cookielib, requests
+import cookielib
 import sys
 from config import get_account
 import re
@@ -36,8 +36,13 @@ def get_data():
     for tr in soup.find('div', attrs={'class': 'tbl_head01'}).find('table').find('tbody').find_all('tr'):
         sbjs = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
         sbj = sbjs.split('                    ')
+
+        if len(sbj)<3:
+            continue
         if sbj[1] is None:
             continue
+
+
         subject = tr.find('td', {'class':'td_subject'}).a.get_text().encode('utf-8')
         subjects = subject.split('                    ')
         comment = tr.find('td', {'class':'td_subject'}).find('a', attrs={'class':'win_comment'}).get_text()

@@ -15,8 +15,14 @@ f = urllib2.urlopen(req)
 soup = BeautifulSoup(f.read(), from_encoding="utf-8")
 
 datas = []
-data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
+data = {'number': 0, 'link': '', 'subject': '', 'price': ''}
 
+pattern = r'(\d+)만'
+priceCheck = re.compile(pattern)
+def getPrice(string):
+    if ( bool(priceCheck.search(string)) ):
+        match = priceCheck.search(string)
+        return match.group()
 
 def get_data():
     global datas, data
@@ -25,10 +31,16 @@ def get_data():
         data['number'] = tr.td.get_text()
         data['link'] = tr.find('td', {'class':'post_subject'}).a['href'].replace('../bbs/board.php', url)
         data['subject'] = tr.find('td', {'class':'post_subject'}).a.get_text().encode('utf-8').strip()
+        if ( getPrice(data['subject']) != None ):
+            data['price'] = getPrice(data['subject'])
+        else:
+            # TODO getPrice From Contents
+            data['price'] = ''
+
         datas.append(dict(data))
 
     # for data in datas:
-    #     print data['link'], data['subject']
+        # print data['price']
     return datas
 
 # print get_data()

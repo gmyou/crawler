@@ -15,7 +15,14 @@ f = urllib2.urlopen(req)
 soup = BeautifulSoup(f.read(), from_encoding="euc-kr")
 
 datas = []
-data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
+data = {'number': 0, 'subject': '', 'price': '', 'link': ''}
+
+pattern = r'(\d+)만'
+priceCheck = re.compile(pattern)
+def getPrice(string):
+    if ( bool(priceCheck.search(string)) ):
+        match = priceCheck.search(string)
+        return match.group()
 
 def get_data():
     global datas, data
@@ -27,10 +34,16 @@ def get_data():
             data['number'] = tr.td.get_text()
             data['subject'] = tr.a.get_text().encode('utf-8').strip()
             data['link'] = tr.a['href'].replace('zboard.php', url)
+            title = tr.a['title'].encode('utf-8').strip()
+            if ( getPrice(title) != None ):
+                data['price'] = getPrice(title)
+            else:
+                # TODO getPrice From Contents
+                data['price'] = ''
             datas.append(dict(data))
 
     # for data in datas:
-    #     print data['link'], data['subject']
+        # print data['price']
 
     return datas
 

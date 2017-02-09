@@ -19,6 +19,14 @@ trs = soup.find('table', attrs={'class': 'table table-condensed table-hover'}).f
 datas = []
 data = {'number': 0, 'subject': '', 'writer': '', 'write_date': '', 'hits': 0, 'link': ''}
 
+
+pattern = r'(\d+)만원?'
+priceCheck = re.compile(pattern)
+def getPrice(string):
+    if ( bool(priceCheck.search(string)) ):
+        match = priceCheck.search(string)
+        return match.group()
+
 def get_data():
     global datas, data
 
@@ -35,6 +43,13 @@ def get_data():
                 if (i>4): pass
                 i += 1
         data['link'] = tr.a['href'].replace('../sell', url)
+
+        ''' TODO getPrice
+        1. Authorization
+        2. Crawling data['link']
+        3. getPrice
+        4. input data['price']
+        '''
         datas.append(dict(data))
 
     # for data in datas:

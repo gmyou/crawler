@@ -19,7 +19,14 @@ def set_bs(menu_id):
     return soup.find_all('td', attrs={'class': 'list_title_B'})
 
 datas = []
-data = {'link': '', 'subject': ''}
+data = {'link': '', 'subject': '', 'price': ''}
+
+pattern = r'(\d+)만'
+priceCheck = re.compile(pattern)
+def getPrice(string):
+    if ( bool(priceCheck.search(string)) ):
+        match = priceCheck.search(string)
+        return match.group()
 
 def get_data():
     global datas, data, values
@@ -28,10 +35,16 @@ def get_data():
         for _data in set_bs(_values):
             data['link'] = _data.a['href'].replace('./board.php', url)
             data['subject'] = _data.a.get_text()
+            if ( getPrice(data['subject']) != None ):
+                data['price'] = getPrice(data['subject'])
+            else:
+                # TODO getPrice From Contents
+                data['price'] = ''
+
             datas.append(dict(data))
 
     # for data in datas:
-    #     print data['link'], data['subject']
+        # print data['price']
 
     return datas
 
