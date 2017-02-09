@@ -3,7 +3,7 @@
 # Env
 
 ## Gathering
-* Python2.7 & Crontab
+* Python2.7.x & Crontab
 
 ## WAS
 * PHP 5.x Codeigniter 3.x 
