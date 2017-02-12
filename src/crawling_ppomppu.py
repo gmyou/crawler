@@ -2,8 +2,8 @@
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-from getPrice import getPrice
 import sys
+from module.common import getPrice
 
 url = 'http://www.ppomppu.co.kr/recent_main_article.php?type=market'
 
@@ -33,9 +33,9 @@ def get_data():
             pass
         datas.append(dict(data))
 
-    # for data in datas:
-    #     print data['price']
+    for data in datas:
+        print data['price']
 
     return datas
 
-# get_data()
+get_data()
