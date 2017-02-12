@@ -2,7 +2,8 @@
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-import re, sys
+from getPrice import getPrice
+import sys
 
 url = 'http://www.ppomppu.co.kr/recent_main_article.php?type=market'
 
@@ -13,11 +14,6 @@ datas = []
 data = {'link': '', 'subject': '', 'comments': '', 'price': ''}
 
 pattern = r'(\d+)만'
-priceCheck = re.compile(pattern)
-def getPrice(string):
-    if ( bool(priceCheck.search(string)) ):
-        match = priceCheck.search(string)
-        return match.group()
 
 def get_data():
     global datas, data
@@ -28,8 +24,8 @@ def get_data():
             data['link'] = 'http://www.ppomppu.co.kr' + li.a['href']
             data['subject'] = _subject[0]
             data['comments'] = _subject[1]
-            if ( getPrice(data['subject']) != None ):
-                data['price'] = getPrice(data['subject'])
+            if ( getPrice(data['subject'], pattern) != None ):
+                data['price'] = getPrice(data['subject'], pattern)
             else:
                 # TODO getPrice From Contents
                 data['price'] = ''
@@ -38,7 +34,7 @@ def get_data():
         datas.append(dict(data))
 
     # for data in datas:
-        # print data['price']
+    #     print data['price']
 
     return datas
 
